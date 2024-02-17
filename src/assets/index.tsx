@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 export interface SvgIconConstituentValues {
   strokeColor?: string;
   strokeWidth?: string;
@@ -169,7 +170,6 @@ export const Like: SvgIcon = ({ fillColor2 }): JSX.Element => (
     />
   </svg>
 );
-// fill="#FFCDD2"
 
 export const Delete: SvgIcon = (): JSX.Element => (
   <svg
@@ -198,5 +198,39 @@ export const Delete: SvgIcon = (): JSX.Element => (
       d="M847.401 324.783c-2.223 0-4.475-0.333-6.706-1.034L185.038 117.401c-11.765-3.703-18.298-16.239-14.592-27.996 3.706-11.766 16.241-18.288 27.993-14.595l655.656 206.346c11.766 3.703 18.298 16.239 14.592 27.996-2.995 9.531-11.795 15.631-21.286 15.631z"
       fill="#FF3B30"
     />
+  </svg>
+);
+
+export const BackSpace: SvgIcon = ({ fillColor4 }): JSX.Element => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 40"
+    x="0px"
+    y="0px"
+    width="3rem"
+    height="3rem"
+  >
+    <g data-name="Layer 2">
+      <path
+        d="M17.25,16l7.36-7.36a3,3,0,0,0,0-4.24L23.06,2.85a3.06,3.06,0,0,0-4.23,0L7.1,14.59a2,2,0,0,0,0,2.82L18.83,29.15a3,3,0,0,0,4.23,0l1.55-1.55a3,3,0,0,0,0-4.24ZM23.2,26.18l-1.55,1.55a1,1,0,0,1-1.41,0l-8.07-8.07L8.51,16,20.24,4.27a1,1,0,0,1,1.41,0L23.2,5.82a1,1,0,0,1,0,1.4l-7.36,7.37a2,2,0,0,0,0,2.82l7.36,7.37A1,1,0,0,1,23.2,26.18Z"
+        fill="white"
+      />
+    </g>
+    <text
+      x="0"
+      y="47"
+      fill={fillColor4}
+      font-size="5px"
+      font-weight="bold"
+      font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+    ></text>
+    <text
+      x="0"
+      y="52"
+      fill={fillColor4}
+      font-size="5px"
+      font-weight="bold"
+      font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+    ></text>
   </svg>
 );

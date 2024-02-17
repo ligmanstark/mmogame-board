@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ItemCharacter } from '../ItemCharacter/ItemCharacter';
 import { NextPageIcon, PrevPageIcon } from '@/assets';
 import { setPage } from '../../store/slices/pageSlice';
-import { scrollPageUp } from '../../helpers/scrollUp';
 export const ListCharacter = () => {
   const characters = useSelector(
     (state: RootState) => state.charactersReducer.characters
@@ -24,14 +23,12 @@ export const ListCharacter = () => {
   const handleNextPage = () => {
     if (currentPage < pages) {
       dispatch(setPage(currentPage + 1));
-      scrollPageUp();
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
       dispatch(setPage(currentPage - 1));
-      scrollPageUp();
     }
   };
 

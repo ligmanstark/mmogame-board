@@ -19,7 +19,10 @@ export type results = {
   gender: string;
   location: location;
   image: string;
- };
+  origin: {
+    name: string;
+  };
+};
 
 export type ricksUniverse = {
   info: info;

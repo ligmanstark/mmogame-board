@@ -2,18 +2,22 @@
 import * as S from './style';
 import { results } from '../../types/types';
 import { Like, Delete } from '@/assets';
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { Button } from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { useRouter } from 'next/navigation';
 import {
   setFavorites,
   deleteFavorites
 } from '../../store/slices/favoritesSlice';
+import { setSelectChar } from '@/store/slices/selectCharSlice';
 import { deleteCharacters } from '@/store/slices/charactersSlice';
-
+import { useLazyGetSelectCharQuery } from '@/store/services/selectCharService';
 export const ItemCharacter = (props: results) => {
   const { id, image, name } = props;
+
+  const [fetchData] = useLazyGetSelectCharQuery();
 
   const favorites = useSelector(
     (state: RootState) => state.favoritesReducer.characters
@@ -26,6 +30,7 @@ export const ItemCharacter = (props: results) => {
     (state: RootState) => state.filterReducer.filter
   );
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const [isLike, setLike] = useState(false);
@@ -45,17 +50,27 @@ export const ItemCharacter = (props: results) => {
     const newArr = characters.filter((el: results) => el.id !== id);
     dispatch(deleteCharacters(newArr));
   };
-  useEffect(() => {
+
+  const handleShowCharacter = (event: React.FormEvent<HTMLElement>) => {
+    const target = event.target as HTMLButtonElement;
+
+    fetchData(target.id).then((res) => {
+      dispatch(setSelectChar([res.data]));
+      router.push(target.id);
+    });
+  };
+
+  useLayoutEffect(() => {
     const favorId = favorites.map((el) => el.id);
-       if(favorId.includes(id)){
+    if (favorId.includes(id)) {
       setLike(true);
     }
-  },[characters, favorites, id]);
+  }, [characters, favorites, id]);
 
   return (
     <S.Wrapper id={id}>
-      <S.Box>
-        <S.Img src={image} alt={name} />
+      <S.Box onClick={handleShowCharacter}>
+        <S.Img src={image} alt={name} id={id} />
         <S.H2>{name}</S.H2>
         <S.IconBox>
           <Button

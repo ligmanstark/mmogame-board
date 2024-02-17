@@ -11,7 +11,7 @@ export const favoritesSlice = createSlice({
   reducers: {
     setFavorites(state: characters, action) {
       state.characters.push(action.payload);
-     },
+    },
     deleteFavorites(state: characters, action) {
       state.characters = action.payload;
     }
