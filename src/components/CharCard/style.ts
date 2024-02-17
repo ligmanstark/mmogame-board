@@ -9,7 +9,7 @@ export const Box = styled.div`
 `;
 
 export const ButtonBox = styled.div`
-cursor: pointer;
+  cursor: pointer;
 
   margin-bottom: 1rem;
   width: 16rem;
