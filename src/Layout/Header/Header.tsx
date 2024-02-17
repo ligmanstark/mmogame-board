@@ -1,11 +1,13 @@
 'use client';
 import { FC } from 'react';
 import { Container } from '../../styled/components';
-
+import * as S from './style';
 export const Header: FC = () => {
   return (
     <>
-      <Container>Header</Container>
+      <Container>
+        <S.Wrapper>Rick and Morty Character Universe</S.Wrapper>
+      </Container>
     </>
   );
 };

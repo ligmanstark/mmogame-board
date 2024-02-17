@@ -1,21 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-
-// import { goodsApi } from './service/goodsService';
-// import goodsReducer from './slices/goodsSlice';
-// import userReducer from './slices/userSlice';
-import modalReducer from './slices/modalSlice';
-// import commentsReducer from './slices/commentsSlice';
-
+import charactersReducer from './slices/charactersSlice';
+import { charactersService } from './services/charactersService';
+import infoReducer from '../store/slices/infoSlice';
+import pageReducer from '../store/slices/pageSlice';
+import favoritesReducer from './slices/favoritesSlice';
+import filterReducer from './slices/FilterSlice';
 export const store = configureStore({
   reducer: {
-    // [goodsApi.reducerPath]: goodsApi.reducer, - service/
-    // goodsReducer: goodsReducer, - slices/
-    // userReducer: userReducer,
-    modalReducer: modalReducer
-    // commentsReducer: commentsReducer,
-  }
-  // middleware: (getDefaultMiddleware) =>
-  // 	getDefaultMiddleware().concat(goodsApi.middleware), - мидлвара для service/
+    [charactersService.reducerPath]: charactersService.reducer,
+    charactersReducer: charactersReducer,
+    infoReducer: infoReducer,
+    pageReducer: pageReducer,
+    favoritesReducer: favoritesReducer,
+    filterReducer: filterReducer
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(charactersService.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;
