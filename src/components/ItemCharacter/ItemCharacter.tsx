@@ -1,8 +1,8 @@
-'use client'
+'use client';
 import * as S from './style';
 import { results } from '../../types/types';
 import { Like, Delete } from '@/assets';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
@@ -11,7 +11,6 @@ import {
   deleteFavorites
 } from '../../store/slices/favoritesSlice';
 import { deleteCharacters } from '@/store/slices/charactersSlice';
-
 
 export const ItemCharacter = (props: results) => {
   const { id, image, name } = props;
@@ -23,20 +22,19 @@ export const ItemCharacter = (props: results) => {
     (state: RootState) => state.charactersReducer.characters
   );
 
-  const isFilter = useSelector((state:RootState)=>state.filterReducer.filter)
-
+  const isFilter = useSelector(
+    (state: RootState) => state.filterReducer.filter
+  );
 
   const dispatch = useDispatch();
 
   const [isLike, setLike] = useState(false);
 
-
-
   const handleFavorites = () => {
     if (!favorites.map((el: results) => el.id).includes(id)) {
       setLike((prev) => !prev);
       dispatch(setFavorites(props));
-      } else {
+    } else {
       const newArr = favorites.filter((el: results) => el.id !== id);
       dispatch(deleteFavorites(newArr));
       setLike((prev) => !prev);
@@ -44,14 +42,17 @@ export const ItemCharacter = (props: results) => {
   };
 
   const handleDeleteCard = () => {
-    const newArr = characters.filter((el:results)=>el.id !== id)
-     dispatch(deleteCharacters(newArr))
+    const newArr = characters.filter((el: results) => el.id !== id);
+    dispatch(deleteCharacters(newArr));
   };
-useEffect(() => {
-  const charId = characters.map((el)=>el.id)
-  // if(favorites.map((el: results) => [el.id]).includes(charId))
-  console.log(favorites.map((el: results) => el.id).includes(charId));
-});
+  useEffect(() => {
+    const favorId = favorites.map((el) => el.id);
+    const charId = characters.map((el) => el.id);
+    const newArr = charId.filter((el) => favorId.indexOf(el) !== -1);
+     if(newArr.includes(id)){
+      setLike(true);
+    }
+  },[characters, favorites, id]);
 
   return (
     <S.Wrapper id={id}>
@@ -67,8 +68,12 @@ useEffect(() => {
             }}
             onClick={handleFavorites}
           >
-            {!isLike&&!isFilter ? <Like fillColor2="gray" /> :<Like fillColor2="red" />}
-           </Button>
+            {!isLike && !isFilter ? (
+              <Like fillColor2="gray" />
+            ) : (
+              <Like fillColor2="red" />
+            )}
+          </Button>
           <Button onClick={handleDeleteCard} style={{ cursor: 'pointer' }}>
             <Delete />
           </Button>
