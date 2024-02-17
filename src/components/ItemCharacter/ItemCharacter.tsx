@@ -47,9 +47,7 @@ export const ItemCharacter = (props: results) => {
   };
   useEffect(() => {
     const favorId = favorites.map((el) => el.id);
-    const charId = characters.map((el) => el.id);
-    const newArr = charId.filter((el) => favorId.indexOf(el) !== -1);
-     if(newArr.includes(id)){
+       if(favorId.includes(id)){
       setLike(true);
     }
   },[characters, favorites, id]);
