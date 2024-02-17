@@ -3,9 +3,11 @@ import styled from '@emotion/styled';
 import { Container } from '../../styled/components';
 import Link from 'next/link';
 
-export const Wrapper = styled.header`
+export const Wrapper = styled.h1`
+  margin-top: 1rem;
   background: transparent;
   height: 6rem;
+  text-align: center;
 `;
 
 export const MyContainer = styled(Container)`
