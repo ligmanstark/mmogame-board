@@ -7,6 +7,8 @@ import pageReducer from '../store/slices/pageSlice';
 import favoritesReducer from './slices/favoritesSlice';
 import filterReducer from './slices/FilterSlice';
 import selectCharReducer from './slices/selectCharSlice';
+import deleteListReducer from './slices/deleteListSlice';
+
 export const store = configureStore({
   reducer: {
     [charactersService.reducerPath]: charactersService.reducer,
@@ -16,7 +18,8 @@ export const store = configureStore({
     pageReducer: pageReducer,
     favoritesReducer: favoritesReducer,
     filterReducer: filterReducer,
-    selectCharReducer: selectCharReducer
+    selectCharReducer: selectCharReducer,
+    deleteListReducer: deleteListReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

@@ -8,18 +8,32 @@ import { GlobalStyles } from '../styled/GlobalStyles';
 import { Header } from '../Layout/Header/Header';
 import { Footer } from '../Layout/Footer/Footer';
 import { Container } from '../styled/components';
-import { useGetCharacterQuery } from '../store/services/charactersService';
+import { useLazyGetCharacterQuery } from '../store/services/charactersService';
 import { ListCharacter } from '../components/ListCharacter/ListCharacter';
 import { Filter } from '../components/Filter/Filter';
+import { results } from '@/types/types';
 const Home = () => {
   const currentPage = useSelector((state: RootState) => state.pageReducer.page);
+  const deleteList = useSelector(
+    (state: RootState) => state.deleteListReducer.characters
+  );
+
   const dispatch = useDispatch();
-  const { data = [] } = useGetCharacterQuery(currentPage);
+  const [fetchData] = useLazyGetCharacterQuery();
 
   useEffect(() => {
-    dispatch(setCharacters(data as []));
-    dispatch(setInfo(data));
-  }, [data, dispatch]);
+    fetchData(currentPage).then((res) => {
+      const blackList = deleteList.map((el) => el.id);
+      const data = res.data as unknown as results;
+      const whiteList: results = data.filter(
+        (el: results) => blackList.indexOf(el.id) === -1
+      );
+
+      dispatch(setCharacters(whiteList));
+      dispatch(setInfo(res.data));
+    });
+  }, [currentPage]);
+
   return (
     <main>
       <GlobalStyles />

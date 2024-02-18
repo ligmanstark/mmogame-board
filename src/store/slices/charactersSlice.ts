@@ -10,7 +10,7 @@ export const charactersSlice = createSlice({
   initialState,
   reducers: {
     setCharacters(state: characters, action) {
-      state.characters = action.payload.results;
+      state.characters = action.payload;
     },
     deleteCharacters(state: characters, action) {
       state.characters = action.payload;

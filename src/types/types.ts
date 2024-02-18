@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type info = {
   count: number;
   pages: number;
@@ -11,6 +12,7 @@ type location = {
 };
 
 export type results = {
+  [x: string]: any;
   id: string;
   name: string;
   status: string;
