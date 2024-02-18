@@ -12,8 +12,8 @@ type location = {
 };
 
 export type results = {
-  [x: string]: any;
-  id: string;
+  filter(arg0: (el: results) => boolean): unknown;
+   id: string;
   name: string;
   status: string;
   species: string;
