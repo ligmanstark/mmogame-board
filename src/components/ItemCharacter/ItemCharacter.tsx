@@ -14,6 +14,8 @@ import {
 import { setSelectChar } from '@/store/slices/selectCharSlice';
 import { deleteCharacters } from '@/store/slices/charactersSlice';
 import { useLazyGetSelectCharQuery } from '@/store/services/selectCharService';
+import { addDeleteList } from '@/store/slices/deleteListSlice';
+
 export const ItemCharacter = (props: results) => {
   const { id, image, name } = props;
 
@@ -47,8 +49,19 @@ export const ItemCharacter = (props: results) => {
   };
 
   const handleDeleteCard = () => {
-    const newArr = characters.filter((el: results) => el.id !== id);
-    dispatch(deleteCharacters(newArr));
+    if (!isFilter) {
+      const newArr = characters.filter((el: results) => el.id !== id);
+      dispatch(deleteCharacters(newArr));
+
+      const deleteArr = characters.filter((el: results) => el.id === id);
+      dispatch(addDeleteList(deleteArr[0]));
+    } else {
+      const newArr = favorites.filter((el: results) => el.id !== id);
+      dispatch(deleteFavorites(newArr));
+
+      const deleteArr = favorites.filter((el: results) => el.id === id);
+      dispatch(addDeleteList(deleteArr[0]));
+    }
   };
 
   const handleShowCharacter = (event: React.FormEvent<HTMLElement>) => {

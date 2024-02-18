@@ -220,17 +220,17 @@ export const BackSpace: SvgIcon = ({ fillColor4 }): JSX.Element => (
       x="0"
       y="47"
       fill={fillColor4}
-      font-size="5px"
-      font-weight="bold"
-      font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+      fontSize="5px"
+      fontWeight="bold"
+      fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
     ></text>
     <text
       x="0"
       y="52"
       fill={fillColor4}
-      font-size="5px"
-      font-weight="bold"
-      font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
+      fontSize="5px"
+      fontWeight="bold"
+      fontFamily="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif"
     ></text>
   </svg>
 );
