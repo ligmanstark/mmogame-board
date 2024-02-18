@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 
 export const PageBox = styled.div`
   position: fixed;
-  left: 4.4%;
+  left: 2%;
   border: 0.05rem solid white;
   border-radius: 1rem;
   box-shadow: inset -1px 1px 4px 4px grey;
