@@ -11,7 +11,7 @@ import { Container } from '../styled/components';
 import { useLazyGetCharacterQuery } from '../store/services/charactersService';
 import { ListCharacter } from '../components/ListCharacter/ListCharacter';
 import { Filter } from '../components/Filter/Filter';
-import { results } from '@/types/types';
+import { results, ricksUniverse } from '@/types/types';
 const Home = () => {
   const currentPage = useSelector((state: RootState) => state.pageReducer.page);
   const deleteList = useSelector(
@@ -24,10 +24,9 @@ const Home = () => {
   useEffect(() => {
     fetchData(currentPage).then((res) => {
       const blackList = deleteList.map((el) => el.id);
-      const data = res.data as unknown as results;
-      const whiteList: results = data.filter(
-        (el: results) => blackList.indexOf(el.id) === -1
-      );
+      const data = (res.data as unknown) as ricksUniverse;
+
+      const whiteList = data.results.filter((el: results) => blackList.indexOf(el.id) === -1);
 
       dispatch(setCharacters(whiteList));
       dispatch(setInfo(res.data));
