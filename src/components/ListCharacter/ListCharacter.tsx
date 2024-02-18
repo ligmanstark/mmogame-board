@@ -36,10 +36,10 @@ export const ListCharacter = () => {
     <>
       <S.PageBox>
         <S.ControllPage onClick={handlePrevPage}>
-          <PrevPageIcon fillColor="white" />
+          <PrevPageIcon fillColor="black" />
         </S.ControllPage>
         <S.ControllPage onClick={handleNextPage}>
-          <NextPageIcon fillColor="white" />
+          <NextPageIcon fillColor="black" />
         </S.ControllPage>
       </S.PageBox>
       <S.Wrapper>
