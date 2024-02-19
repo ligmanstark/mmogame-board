@@ -5,5 +5,14 @@ export type ricksState = {
 };
 
 export type characters = {
-  characters: T.results[];
+  allChar: T.results[];
+  deleteChar: T.results[];
+  favoriteChar: T.results[];
+  selectChar: T.results[];
+  filter: boolean;
+  page: number;
+  count: number;
+  pages: number;
+  next: string | null;
+  prev: string | null;
 };

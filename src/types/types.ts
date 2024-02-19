@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export type info = {
   count: number;
   pages: number;
@@ -13,7 +12,7 @@ type location = {
 
 export type results = {
   filter(arg0: (el: results) => boolean): unknown;
-   id: string;
+  id: string;
   name: string;
   status: string;
   species: string;

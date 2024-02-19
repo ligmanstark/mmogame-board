@@ -10,26 +10,26 @@ import { useRouter } from 'next/navigation';
 import {
   setFavorites,
   deleteFavorites
-} from '../../store/slices/favoritesSlice';
-import { setSelectChar } from '@/store/slices/selectCharSlice';
+} from '../../store/slices/charactersSlice';
+import { setSelectChar } from '@/store/slices/charactersSlice';
 import { deleteCharacters } from '@/store/slices/charactersSlice';
 import { useLazyGetSelectCharQuery } from '@/store/services/selectCharService';
-import { addDeleteList } from '@/store/slices/deleteListSlice';
-
+import { addDeleteList } from '@/store/slices/charactersSlice';
+import { deleteCard } from '@/helpers/deleteCard';
 export const ItemCharacter = (props: results) => {
   const { id, image, name } = props;
 
   const [fetchData] = useLazyGetSelectCharQuery();
 
   const favorites = useSelector(
-    (state: RootState) => state.favoritesReducer.characters
+    (state: RootState) => state.charactersReducer.favoriteChar
   );
   const characters = useSelector(
-    (state: RootState) => state.charactersReducer.characters
+    (state: RootState) => state.charactersReducer.allChar
   );
 
   const isFilter = useSelector(
-    (state: RootState) => state.filterReducer.filter
+    (state: RootState) => state.charactersReducer.filter
   );
 
   const router = useRouter();
@@ -43,6 +43,7 @@ export const ItemCharacter = (props: results) => {
       dispatch(setFavorites(props));
     } else {
       const newArr = favorites.filter((el: results) => el.id !== id);
+      console.log(newArr);
       dispatch(deleteFavorites(newArr));
       setLike((prev) => !prev);
     }
@@ -50,23 +51,20 @@ export const ItemCharacter = (props: results) => {
 
   const handleDeleteCard = () => {
     if (!isFilter) {
-      const newArr = characters.filter((el: results) => el.id !== id);
-      dispatch(deleteCharacters(newArr));
+      dispatch(deleteFavorites(deleteCard(id, favorites, undefined)));
+      dispatch(deleteCharacters(deleteCard(id, characters, undefined)));
 
-      const deleteArr = characters.filter((el: results) => el.id === id);
-      dispatch(addDeleteList(deleteArr[0]));
+      dispatch(addDeleteList(deleteCard(id, undefined, characters)));
     } else {
-      const newArr = favorites.filter((el: results) => el.id !== id);
-      dispatch(deleteFavorites(newArr));
+      dispatch(deleteFavorites(deleteCard(id, favorites, undefined)));
+      dispatch(deleteCharacters(deleteCard(id, characters, undefined)));
 
-      const deleteArr = favorites.filter((el: results) => el.id === id);
-      dispatch(addDeleteList(deleteArr[0]));
+      dispatch(addDeleteList(deleteCard(id, undefined, favorites)));
     }
   };
 
   const handleShowCharacter = (event: React.FormEvent<HTMLElement>) => {
     const target = event.target as HTMLButtonElement;
-
     fetchData(target.id).then((res) => {
       dispatch(setSelectChar([res.data]));
       router.push(target.id);
@@ -82,8 +80,8 @@ export const ItemCharacter = (props: results) => {
 
   return (
     <S.Wrapper id={id}>
-      <S.Box onClick={handleShowCharacter}>
-        <S.Img src={image} alt={name} id={id} />
+      <S.Box>
+        <S.Img src={image} alt={name} id={id} onClick={handleShowCharacter} />
         <S.H2>{name}</S.H2>
         <S.IconBox>
           <Button

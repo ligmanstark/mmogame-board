@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 
 export const Wrapper = styled.div``;
 
-export const Img = styled.img``;
+export const Img = styled.img`
+  cursor: pointer;
+`;
 
 export const H2 = styled.h2`
   white-space: nowrap;
