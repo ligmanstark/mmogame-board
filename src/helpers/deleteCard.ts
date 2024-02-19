@@ -6,8 +6,9 @@ export const deleteCard = (
   deleteValue?: results[]
 ) => {
   if (value) {
+    console.log(value, id);
     return value.filter((el: results) => el.id !== id);
   } else {
-    return deleteValue?.filter((el: results) => el.id === id)[0];
+    return deleteValue?.filter((el: results) => el.id === id);
   }
 };

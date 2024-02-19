@@ -43,6 +43,7 @@ export const ItemCharacter = (props: results) => {
       dispatch(setFavorites(props));
     } else {
       const newArr = favorites.filter((el: results) => el.id !== id);
+      console.log(newArr);
       dispatch(deleteFavorites(newArr));
       setLike((prev) => !prev);
     }
@@ -50,10 +51,14 @@ export const ItemCharacter = (props: results) => {
 
   const handleDeleteCard = () => {
     if (!isFilter) {
-      dispatch(deleteCharacters(deleteCard(id, characters)));
+      dispatch(deleteFavorites(deleteCard(id, favorites, undefined)));
+      dispatch(deleteCharacters(deleteCard(id, characters, undefined)));
+
       dispatch(addDeleteList(deleteCard(id, undefined, characters)));
     } else {
-      dispatch(deleteCharacters(deleteCard(id, favorites)));
+      dispatch(deleteFavorites(deleteCard(id, favorites, undefined)));
+      dispatch(deleteCharacters(deleteCard(id, characters, undefined)));
+
       dispatch(addDeleteList(deleteCard(id, undefined, favorites)));
     }
   };
