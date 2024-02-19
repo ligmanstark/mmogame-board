@@ -6,4 +6,5 @@ export type ricksState = {
 
 export type characters = {
   characters: T.results[];
+  deleteChar: T.results[];
 };

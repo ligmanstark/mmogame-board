@@ -15,7 +15,7 @@ import { setSelectChar } from '@/store/slices/selectCharSlice';
 import { deleteCharacters } from '@/store/slices/charactersSlice';
 import { useLazyGetSelectCharQuery } from '@/store/services/selectCharService';
 import { addDeleteList } from '@/store/slices/deleteListSlice';
-
+import { deleteCard } from '@/helpers/deleteCard';
 export const ItemCharacter = (props: results) => {
   const { id, image, name } = props;
 
@@ -50,23 +50,17 @@ export const ItemCharacter = (props: results) => {
 
   const handleDeleteCard = () => {
     if (!isFilter) {
-      const newArr = characters.filter((el: results) => el.id !== id);
-      dispatch(deleteCharacters(newArr));
-
-      const deleteArr = characters.filter((el: results) => el.id === id);
-      dispatch(addDeleteList(deleteArr[0]));
+      dispatch(deleteCharacters(deleteCard(id, characters)));
+      dispatch(addDeleteList(deleteCard(id, undefined, characters)));
     } else {
-      const newArr = favorites.filter((el: results) => el.id !== id);
-      dispatch(deleteFavorites(newArr));
-
-      const deleteArr = favorites.filter((el: results) => el.id === id);
-      dispatch(addDeleteList(deleteArr[0]));
+      dispatch(deleteCharacters(deleteCard(id, favorites)));
+      dispatch(addDeleteList(deleteCard(id, undefined, favorites)));
     }
   };
 
   const handleShowCharacter = (event: React.FormEvent<HTMLElement>) => {
     const target = event.target as HTMLButtonElement;
-     fetchData(target.id).then((res) => {
+    fetchData(target.id).then((res) => {
       dispatch(setSelectChar([res.data]));
       router.push(target.id);
     });
@@ -82,7 +76,7 @@ export const ItemCharacter = (props: results) => {
   return (
     <S.Wrapper id={id}>
       <S.Box>
-        <S.Img src={image} alt={name} id={id} onClick={handleShowCharacter}/>
+        <S.Img src={image} alt={name} id={id} onClick={handleShowCharacter} />
         <S.H2>{name}</S.H2>
         <S.IconBox>
           <Button

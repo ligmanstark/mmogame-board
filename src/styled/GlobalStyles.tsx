@@ -52,7 +52,6 @@ export const GlobalStyles: FC = () => (
         --card-border-rgb: 131, 134, 135;
       }
 
-       
       * {
         box-sizing: border-box;
         padding: 0;

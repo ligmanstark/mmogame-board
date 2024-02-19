@@ -15,7 +15,10 @@ export const Filter = () => {
   return (
     <S.Wrapper>
       <S.Box>
-        <Button style={{ fontSize: '2rem',color: 'black' }} onClick={handleFilter}>
+        <Button
+          style={{ fontSize: '2rem', color: 'black' }}
+          onClick={handleFilter}
+        >
           L<br />i<br />k<br />e<br />d<br />
         </Button>
       </S.Box>

@@ -24,9 +24,11 @@ const Home = () => {
   useEffect(() => {
     fetchData(currentPage).then((res) => {
       const blackList = deleteList.map((el) => el.id);
-      const data = (res.data as unknown) as ricksUniverse;
+      const data = res.data as unknown as ricksUniverse;
 
-      const whiteList = data.results.filter((el: results) => blackList.indexOf(el.id) === -1);
+      const whiteList = data.results.filter(
+        (el: results) => blackList.indexOf(el.id) === -1
+      );
 
       dispatch(setCharacters(whiteList));
       dispatch(setInfo(res.data));

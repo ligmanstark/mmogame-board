@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { characters } from '../../types/typesState';
 
 const initialState: characters = {
-  characters: []
+  characters: [],
+  deleteChar: []
 };
 
 export const charactersSlice = createSlice({
@@ -14,9 +15,13 @@ export const charactersSlice = createSlice({
     },
     deleteCharacters(state: characters, action) {
       state.characters = action.payload;
+    },
+    addDeleteList(state: characters, action) {
+      state.deleteChar.push(action.payload);
     }
   }
 });
 
-export const { setCharacters, deleteCharacters } = charactersSlice.actions;
+export const { setCharacters, deleteCharacters, addDeleteList } =
+  charactersSlice.actions;
 export default charactersSlice.reducer;

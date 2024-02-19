@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Wrapper = styled.div``;
 
 export const Img = styled.img`
-    cursor: pointer;
+  cursor: pointer;
 `;
 
 export const H2 = styled.h2`
