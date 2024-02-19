@@ -66,8 +66,7 @@ export const ItemCharacter = (props: results) => {
 
   const handleShowCharacter = (event: React.FormEvent<HTMLElement>) => {
     const target = event.target as HTMLButtonElement;
-
-    fetchData(target.id).then((res) => {
+     fetchData(target.id).then((res) => {
       dispatch(setSelectChar([res.data]));
       router.push(target.id);
     });
@@ -82,8 +81,8 @@ export const ItemCharacter = (props: results) => {
 
   return (
     <S.Wrapper id={id}>
-      <S.Box onClick={handleShowCharacter}>
-        <S.Img src={image} alt={name} id={id} />
+      <S.Box>
+        <S.Img src={image} alt={name} id={id} onClick={handleShowCharacter}/>
         <S.H2>{name}</S.H2>
         <S.IconBox>
           <Button
