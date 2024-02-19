@@ -3,23 +3,25 @@ import { RootState } from '../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { ItemCharacter } from '../ItemCharacter/ItemCharacter';
 import { NextPageIcon, PrevPageIcon } from '@/assets';
-import { setPage } from '../../store/slices/pageSlice';
+import { setPage } from '../../store/slices/charactersSlice';
 export const ListCharacter = () => {
   const characters = useSelector(
-    (state: RootState) => state.charactersReducer.characters
+    (state: RootState) => state.charactersReducer.allChar
   );
 
   const favorites = useSelector(
-    (state: RootState) => state.favoritesReducer.characters
+    (state: RootState) => state.charactersReducer.favoriteChar
   );
 
   const isFilter = useSelector(
-    (state: RootState) => state.filterReducer.filter
+    (state: RootState) => state.charactersReducer.filter
   );
 
   const dispatch = useDispatch();
-  const pages = useSelector((state: RootState) => state.infoReducer.pages);
-  const currentPage = useSelector((state: RootState) => state.pageReducer.page);
+  const pages = useSelector((state: RootState) => state.charactersReducer.pages);
+  const currentPage = useSelector(
+    (state: RootState) => state.charactersReducer.page
+  );
   const handleNextPage = () => {
     if (currentPage < pages) {
       dispatch(setPage(currentPage + 1));

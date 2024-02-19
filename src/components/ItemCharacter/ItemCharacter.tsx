@@ -10,11 +10,11 @@ import { useRouter } from 'next/navigation';
 import {
   setFavorites,
   deleteFavorites
-} from '../../store/slices/favoritesSlice';
-import { setSelectChar } from '@/store/slices/selectCharSlice';
+} from '../../store/slices/charactersSlice';
+import { setSelectChar } from '@/store/slices/charactersSlice';
 import { deleteCharacters } from '@/store/slices/charactersSlice';
 import { useLazyGetSelectCharQuery } from '@/store/services/selectCharService';
-import { addDeleteList } from '@/store/slices/deleteListSlice';
+import { addDeleteList } from '@/store/slices/charactersSlice';
 import { deleteCard } from '@/helpers/deleteCard';
 export const ItemCharacter = (props: results) => {
   const { id, image, name } = props;
@@ -22,14 +22,14 @@ export const ItemCharacter = (props: results) => {
   const [fetchData] = useLazyGetSelectCharQuery();
 
   const favorites = useSelector(
-    (state: RootState) => state.favoritesReducer.characters
+    (state: RootState) => state.charactersReducer.favoriteChar
   );
   const characters = useSelector(
-    (state: RootState) => state.charactersReducer.characters
+    (state: RootState) => state.charactersReducer.allChar
   );
 
   const isFilter = useSelector(
-    (state: RootState) => state.filterReducer.filter
+    (state: RootState) => state.charactersReducer.filter
   );
 
   const router = useRouter();

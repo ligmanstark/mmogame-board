@@ -2,7 +2,7 @@ import * as S from './style';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import { deleteSelectChar } from '@/store/slices/selectCharSlice';
+import { deleteSelectChar } from '@/store/slices/charactersSlice';
 import { CardInfo } from '../CardInfo/CardInfo';
 import { CardImg } from '../CardImg/CardImg';
 import { BackSpace } from '@/assets/index';
@@ -10,7 +10,7 @@ export const CharCard = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const selectChar = useSelector(
-    (state: RootState) => state.selectCharReducer.characters
+    (state: RootState) => state.charactersReducer.selectChar
   );
 
   const handleBack = () => {

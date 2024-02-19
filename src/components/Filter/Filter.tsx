@@ -1,13 +1,13 @@
 import * as S from './style';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from '../../store/slices/FilterSlice';
+import { setFilter } from '../../store/slices/charactersSlice';
 import { RootState } from '../../store/store';
 import { Button } from '../Button/Button';
 
 export const Filter = () => {
   const dispatch = useDispatch();
   const isFilter = useSelector(
-    (state: RootState) => state.filterReducer.filter
+    (state: RootState) => state.charactersReducer.filter
   );
   const handleFilter = () => {
     dispatch(setFilter(!isFilter));
